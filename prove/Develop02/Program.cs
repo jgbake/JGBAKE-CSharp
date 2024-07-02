@@ -15,6 +15,8 @@ class Program
         bool exitCase = false;
 
         Console.WriteLine("Welcome to your Journal");
+        Console.Write("Who is writing today? ");
+        string currentAuthor = Console.ReadLine();
         do {
             Console.WriteLine("1. Write New Entry");
             Console.WriteLine("2. Display Journal");
@@ -28,7 +30,8 @@ class Program
             {
                 Entry currentEntry = new Entry();
                 currentEntry._date = DateTime.Now.ToShortDateString();
-                Console.WriteLine(currentEntry._date);
+                currentEntry._entryAuthor = currentAuthor;
+                Console.WriteLine($"Date: {currentEntry._date} Author: {currentEntry._entryAuthor}");
                 currentEntry._promptText = promptGen.GetRandomPrompt();
                 Console.WriteLine(currentEntry._promptText);
                 Console.Write("> ");

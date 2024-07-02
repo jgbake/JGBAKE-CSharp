@@ -10,7 +10,7 @@ public class Journal
     }
     public void DisplayAll()
     {
-        Console.WriteLine("");
+        Console.WriteLine("---------------------------------------------------------------------");
         foreach (Entry currentEntry in _journalEntries)
         {
             currentEntry.DisplayEntry();
@@ -24,9 +24,10 @@ public class Journal
             foreach (Entry currentEntry in _journalEntries)
             {
                 string saveDate = currentEntry._date;
+                string saveAuthor = currentEntry._entryAuthor;
                 string savePrompt = currentEntry._promptText;
                 string saveEntryText = currentEntry._entryText;
-                currentFile.WriteLine($"{saveDate}><{savePrompt}><{saveEntryText}");
+                currentFile.WriteLine($"{saveDate}><{saveAuthor}><{savePrompt}><{saveEntryText}");
             }
         }
     }
@@ -42,8 +43,9 @@ public class Journal
                 Entry currentLoadingEntry = new Entry();
 
                 currentLoadingEntry._date = parts[0];
-                currentLoadingEntry._promptText = parts[1];
-                currentLoadingEntry._entryText = parts[2];
+                currentLoadingEntry._entryAuthor = parts[1];
+                currentLoadingEntry._promptText = parts[2];
+                currentLoadingEntry._entryText = parts[3];
             
                 _journalEntries.Add(currentLoadingEntry);
             }
