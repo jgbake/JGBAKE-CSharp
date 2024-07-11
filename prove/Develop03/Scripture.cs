@@ -5,27 +5,40 @@ public class Scripture
 {
     private Reference _reference;
     private List<Word> _scriptWords = new List<Word>();
-    private List<List<Word>> _verses = new List<List<Word>>();
 
-    public Scripture(Reference reference, string text)
+    public Scripture()
     {
-        _reference = reference;
-        string[] verses = text.Split("//");
-        foreach (string verse in verses)
+        string[] scriptFile = File.ReadAllLines("scriptures.txt");
+        Random randomScripture = new Random();
+        string verseProcessing = scriptFile[randomScripture.Next(0,21)];
         {
-            string[] words = verse.Split(" ");
-            foreach (string word in words)
+            string[] parts = verseProcessing.Split("><");
+            if (int.Parse(parts[0]) == 1)
             {
-                _scriptWords.Add(new Word(word));
+                _reference = new Reference(parts[1], int.Parse(parts[2]), int.Parse(parts[3]));
+                string[] words = parts[4].Split(" ");
+                foreach (string word in words)
+                {
+                    _scriptWords.Add(new Word(word));
+                }
             }
-            _scriptWords.Add(new Word("SEPARATOR"));
+            else if (int.Parse(parts[0]) > 1)
+            {
+                _reference = new Reference(parts[1], int.Parse(parts[2]), int.Parse(parts[3]), int.Parse(parts[4]));
+                string[] words = parts[5].Split(" ");
+                foreach (string word in words)
+                {
+                    _scriptWords.Add(new Word(word));
+                }
+            }
         }
     }
 
-    public void HideRandomWords(int numberToHide)
+    public void HideRandomWords()
     {
         Random randomWordIndex = new Random();
-        while (numberToHide != 0)
+        int toHide = 3;
+        while (toHide != 0)
         {
             bool wordHidden = false;
             while (wordHidden == false)
@@ -52,24 +65,35 @@ public class Scripture
                 wordHidden = true;
                 }
             }
-            numberToHide -= 1;
+            toHide -= 1;
         }
     }
 
     public string GetDisplayText()
     {
-        string toDisplay = $"{_reference.GetDisplayText()}\n";
+        int currentVerse = _reference.GetFirstVerse();
+        string toDisplay = $"\n\x1b[1m{_reference.GetDisplayText()}\n\n";
+        string currentLine = $"   {currentVerse}\x1b[0m ";
         foreach (Word word in _scriptWords)
         {
             if (word.GetDisplayText() == "SEPARATOR")
             {
-                toDisplay += "\n";
+                toDisplay += currentLine;
+                currentVerse += 1;
+                currentLine = $"\n\n   \x1b[1m{currentVerse}\x1b[0m ";
+            }
+            else if (currentLine.Length > 64)
+            {
+                toDisplay += currentLine;
+                currentLine = "\n   " + word.GetDisplayText() + " ";
             }
             else
             {
-                toDisplay += word.GetDisplayText() + " ";
+                currentLine += word.GetDisplayText() + " ";
             }
         }
+
+        toDisplay += currentLine;
         return toDisplay;
     }
 
