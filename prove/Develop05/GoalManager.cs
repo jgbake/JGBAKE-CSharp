@@ -95,7 +95,7 @@ public class GoalManager
     }
     public void RecordEvent()
     {
-        Console.WriteLine("What is the index of the goal you completed?\n > ");
+        Console.WriteLine("What is the index of the goal you completed?");
         int goalIndex = int.Parse(Console.ReadLine());
         _score += _goals[goalIndex - 1].GetPoints();
     }
