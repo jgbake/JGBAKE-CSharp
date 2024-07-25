@@ -23,7 +23,7 @@ public class SimpleGoal : Goal
     }
     public override string GetGoalType()
     {
-        return "EternalGoal";
+        return "SimpleGoal";
     }
     public override string GetDisplayText()
     {

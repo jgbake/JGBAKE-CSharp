@@ -15,7 +15,7 @@ public class ChecklistGoal : Goal
 
     public override int GetPoints()
     {
-        if (_amountCompleted % _target == 0)
+        if ((_amountCompleted % _target == 0) && (_amountCompleted != 0))
         {
             return _bonus;
         }
