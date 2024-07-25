@@ -18,7 +18,7 @@ class Program
                 "Melissa",
                 new Address("221 Seneca Avenue", "Hamilton", "ON", "L9B 1M1", "Canada")), 
             new List<Product>{
-                new Product("Bunch of Banana", 591, (float)2.49, 1),
+                new Product("Bunch of Bananas", 591, (float)2.49, 1),
                 new Product("Loaf of Bread", 392, (float)2.99, 2),
                 new Product("Whole Ham", 407, (float)8.99, 1)}),
         new Order(
@@ -33,7 +33,7 @@ class Program
                 "Alice",
                 new Address("8909 Young Avenue", "Grayslake", "IL", "60030", "USA")), 
             new List<Product>{
-                new Product("Bunch of Banana", 591, (float)2.49, 2),
+                new Product("Bunch of Bananas", 591, (float)2.49, 2),
                 new Product("Single Apple", 587, (float)0.99, 16),
                 new Product("Jug of Milk", 377, (float)3.49, 2),
                 new Product("Loaf of Bread", 392, (float)2.99, 1)})
