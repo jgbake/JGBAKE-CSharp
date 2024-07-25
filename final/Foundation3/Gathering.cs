@@ -1,3 +1,5 @@
+using System;
+
 public class Gathering : Event
 {
     private string _weather;
